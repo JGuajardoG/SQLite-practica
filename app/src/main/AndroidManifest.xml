@@ -12,10 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplicationTest">
 
-        <!-- Activity para formulario (sin intent-filter) -->
+
         <activity android:name=".AddFoodActivity" />
 
-        <!-- Activity principal con intent-filter -->
+
         <activity
             android:name=".MainActivity"
             android:exported="true">

@@ -23,7 +23,7 @@ public class AddFoodActivity extends AppCompatActivity {
         etDescripcion = findViewById(R.id.etDescripcion);
         btnGuardar = findViewById(R.id.btnGuardar);
         btnEliminar = findViewById(R.id.btnEliminar);
-        btnVolver = findViewById(R.id.btnVolver); // 👈 Nuevo botón
+        btnVolver = findViewById(R.id.btnVolver); //
 
         dbHelper = new DBHelper(this);
 
@@ -92,7 +92,7 @@ public class AddFoodActivity extends AppCompatActivity {
                     .show();
         });
 
-        // Volver sin cambios
+        // botón para volver
         btnVolver.setOnClickListener(v -> finish());
     }
 }

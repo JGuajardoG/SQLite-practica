@@ -37,7 +37,7 @@
             android:visibility="gone"
             android:layout_marginTop="8dp"/>
 
-        <!-- 👇 Nuevo botón Volver -->
+
         <Button
             android:id="@+id/btnVolver"
             android:layout_width="match_parent"

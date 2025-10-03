@@ -27,20 +27,20 @@ public class MainActivity extends AppCompatActivity {
         listView = findViewById(R.id.listViewFoods);
         btnAdd = findViewById(R.id.btnAddFood);
 
-        // Ir a agregar comida
+
         btnAdd.setOnClickListener(v -> {
             Intent i = new Intent(MainActivity.this, AddFoodActivity.class);
             startActivity(i);
         });
 
-        // Click corto = editar
+
         listView.setOnItemClickListener((AdapterView<?> parent, android.view.View view, int position, long id) -> {
             Intent i = new Intent(MainActivity.this, AddFoodActivity.class);
             i.putExtra("food_id", id);
             startActivity(i);
         });
 
-        // Click largo = eliminar
+
         listView.setOnItemLongClickListener((parent, view, position, id) -> {
             new AlertDialog.Builder(MainActivity.this)
                     .setTitle("Eliminar")
