@@ -7,8 +7,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import android.widget.Toast;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -16,7 +14,6 @@ public class MainActivity extends AppCompatActivity {
     ListView listView;
     Button btnAdd;
     SimpleCursorAdapter adapter;
-    Cursor cursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,35 +24,24 @@ public class MainActivity extends AppCompatActivity {
         listView = findViewById(R.id.listViewFoods);
         btnAdd = findViewById(R.id.btnAddFood);
 
-
+        // Nuevo alimento
         btnAdd.setOnClickListener(v -> {
             Intent i = new Intent(MainActivity.this, AddFoodActivity.class);
             startActivity(i);
         });
 
-
+        // Editar (click corto)
         listView.setOnItemClickListener((AdapterView<?> parent, android.view.View view, int position, long id) -> {
-            Intent i = new Intent(MainActivity.this, AddFoodActivity.class);
+            Intent i = new Intent(MainActivity.this, UpdateFoodActivity.class);
             i.putExtra("food_id", id);
             startActivity(i);
         });
 
-
+        // Eliminar (click largo)
         listView.setOnItemLongClickListener((parent, view, position, id) -> {
-            new AlertDialog.Builder(MainActivity.this)
-                    .setTitle("Eliminar")
-                    .setMessage("¿Eliminar esta comida?")
-                    .setPositiveButton("Sí", (dialog, which) -> {
-                        int deleted = dbHelper.deleteFood(id);
-                        if (deleted > 0) {
-                            Toast.makeText(MainActivity.this, "Eliminado", Toast.LENGTH_SHORT).show();
-                            loadData();
-                        } else {
-                            Toast.makeText(MainActivity.this, "No se pudo eliminar", Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .setNegativeButton("No", null)
-                    .show();
+            Intent i = new Intent(MainActivity.this, DeleteFoodActivity.class);
+            i.putExtra("food_id", id);
+            startActivity(i);
             return true;
         });
     }
@@ -67,35 +53,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadData() {
-        Cursor newCursor = dbHelper.getAllFoods();
-
+        Cursor cursor = dbHelper.getAllFoods();
         String[] fromColumns = {
                 FoodContract.FoodEntry.COLUMN_NAME,
                 FoodContract.FoodEntry.COLUMN_DESC
         };
         int[] toViews = { android.R.id.text1, android.R.id.text2 };
 
-        if (adapter == null) {
-            adapter = new SimpleCursorAdapter(this,
-                    android.R.layout.simple_list_item_2,
-                    newCursor,
-                    fromColumns,
-                    toViews,
-                    0);
-            listView.setAdapter(adapter);
-        } else {
-            Cursor old = adapter.getCursor();
-            adapter.changeCursor(newCursor);
-            if (old != null && !old.isClosed()) old.close();
-        }
-    }
+        adapter = new SimpleCursorAdapter(this,
+                android.R.layout.simple_list_item_2,
+                cursor,
+                fromColumns,
+                toViews,
+                0);
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (adapter != null && adapter.getCursor() != null) {
-            adapter.getCursor().close();
-        }
-        if (dbHelper != null) dbHelper.close();
+        listView.setAdapter(adapter);
     }
 }

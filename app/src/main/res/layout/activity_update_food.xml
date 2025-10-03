@@ -24,10 +24,10 @@
             android:minLines="3"/>
 
         <Button
-            android:id="@+id/btnGuardar"
+            android:id="@+id/btnActualizar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Guardar"/>
+            android:text="Actualizar"/>
 
         <Button
             android:id="@+id/btnVolver"
