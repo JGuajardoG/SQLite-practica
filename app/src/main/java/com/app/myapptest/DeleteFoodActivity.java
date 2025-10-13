@@ -20,25 +20,23 @@ public class DeleteFoodActivity extends AppCompatActivity {
         tvMensaje = findViewById(R.id.tvMensaje);
         btnConfirmar = findViewById(R.id.btnConfirmar);
         btnCancelar = findViewById(R.id.btnCancelar);
-
         dbHelper = new DBHelper(this);
 
         if (getIntent() != null && getIntent().hasExtra("food_id")) {
             foodId = getIntent().getLongExtra("food_id", -1);
         }
 
-        tvMensaje.setText("¿Seguro que desea eliminar este alimento?");
-
         btnConfirmar.setOnClickListener(v -> {
             int deleted = dbHelper.deleteFood(foodId);
             if (deleted > 0) {
-                Toast.makeText(this, "Eliminado", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Comida eliminada", Toast.LENGTH_SHORT).show();
                 finish();
             } else {
-                Toast.makeText(this, "No se pudo eliminar", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Error al eliminar", Toast.LENGTH_SHORT).show();
             }
         });
 
         btnCancelar.setOnClickListener(v -> finish());
     }
 }
+

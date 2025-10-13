@@ -22,7 +22,6 @@ public class UpdateFoodActivity extends AppCompatActivity {
         etDescripcion = findViewById(R.id.etDescripcion);
         btnActualizar = findViewById(R.id.btnActualizar);
         btnVolver = findViewById(R.id.btnVolver);
-
         dbHelper = new DBHelper(this);
 
         if (getIntent() != null && getIntent().hasExtra("food_id")) {
@@ -31,8 +30,8 @@ public class UpdateFoodActivity extends AppCompatActivity {
             if (c != null && c.moveToFirst()) {
                 etNombre.setText(c.getString(c.getColumnIndexOrThrow(FoodContract.FoodEntry.COLUMN_NAME)));
                 etDescripcion.setText(c.getString(c.getColumnIndexOrThrow(FoodContract.FoodEntry.COLUMN_DESC)));
+                c.close();
             }
-            if (c != null) c.close();
         }
 
         btnActualizar.setOnClickListener(v -> {
@@ -46,7 +45,7 @@ public class UpdateFoodActivity extends AppCompatActivity {
 
             int updated = dbHelper.updateFood(foodId, nombre, descripcion);
             if (updated > 0) {
-                Toast.makeText(this, "Actualizado", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Actualizado correctamente", Toast.LENGTH_SHORT).show();
                 finish();
             } else {
                 Toast.makeText(this, "Error al actualizar", Toast.LENGTH_SHORT).show();

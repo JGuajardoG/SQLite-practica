@@ -3,8 +3,10 @@ package com.app.myapptest;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.widget.AdapterView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +15,9 @@ public class MainActivity extends AppCompatActivity {
     DBHelper dbHelper;
     ListView listView;
     Button btnAdd;
+    EditText etBuscar;
     SimpleCursorAdapter adapter;
+    Cursor cursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,26 +27,30 @@ public class MainActivity extends AppCompatActivity {
         dbHelper = new DBHelper(this);
         listView = findViewById(R.id.listViewFoods);
         btnAdd = findViewById(R.id.btnAddFood);
+        etBuscar = findViewById(R.id.etBuscar);
 
-        // Nuevo alimento
-        btnAdd.setOnClickListener(v -> {
-            Intent i = new Intent(MainActivity.this, AddFoodActivity.class);
-            startActivity(i);
-        });
+        btnAdd.setOnClickListener(v -> startActivity(new Intent(this, AddFoodActivity.class)));
 
-        // Editar (click corto)
-        listView.setOnItemClickListener((AdapterView<?> parent, android.view.View view, int position, long id) -> {
-            Intent i = new Intent(MainActivity.this, UpdateFoodActivity.class);
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            Intent i = new Intent(this, UpdateFoodActivity.class);
             i.putExtra("food_id", id);
             startActivity(i);
         });
 
-        // Eliminar (click largo)
         listView.setOnItemLongClickListener((parent, view, position, id) -> {
-            Intent i = new Intent(MainActivity.this, DeleteFoodActivity.class);
+            Intent i = new Intent(this, DeleteFoodActivity.class);
             i.putExtra("food_id", id);
             startActivity(i);
             return true;
+        });
+
+        etBuscar.addTextChangedListener(new TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override public void afterTextChanged(Editable s) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filtrarLista(s.toString());
+            }
         });
     }
 
@@ -53,20 +61,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadData() {
-        Cursor cursor = dbHelper.getAllFoods();
-        String[] fromColumns = {
-                FoodContract.FoodEntry.COLUMN_NAME,
-                FoodContract.FoodEntry.COLUMN_DESC
-        };
-        int[] toViews = { android.R.id.text1, android.R.id.text2 };
-
-        adapter = new SimpleCursorAdapter(this,
-                android.R.layout.simple_list_item_2,
-                cursor,
-                fromColumns,
-                toViews,
-                0);
-
+        cursor = dbHelper.getAllFoods();
+        String[] from = {FoodContract.FoodEntry.COLUMN_NAME, FoodContract.FoodEntry.COLUMN_DESC};
+        int[] to = {android.R.id.text1, android.R.id.text2};
+        adapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, cursor, from, to, 0);
         listView.setAdapter(adapter);
+    }
+
+    private void filtrarLista(String texto) {
+        Cursor filtrado = dbHelper.getAllFoods();
+        adapter.changeCursor(filtrado);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (cursor != null) cursor.close();
     }
 }

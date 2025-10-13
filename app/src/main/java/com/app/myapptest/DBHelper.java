@@ -5,10 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "comidas.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2; // versión aumentada por mejora
 
     private static final String SQL_CREATE_TABLE =
             "CREATE TABLE " + FoodContract.FoodEntry.TABLE_NAME + " (" +
@@ -34,14 +35,23 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    // Insertar comida
     public long insertFood(String nombre, String descripcion) {
-        SQLiteDatabase db = getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(FoodContract.FoodEntry.COLUMN_NAME, nombre);
-        values.put(FoodContract.FoodEntry.COLUMN_DESC, descripcion);
-        return db.insert(FoodContract.FoodEntry.TABLE_NAME, null, values);
+        long id = -1;
+        SQLiteDatabase db = null;
+        try {
+            db = getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put(FoodContract.FoodEntry.COLUMN_NAME, nombre);
+            values.put(FoodContract.FoodEntry.COLUMN_DESC, descripcion);
+            id = db.insert(FoodContract.FoodEntry.TABLE_NAME, null, values);
+        } finally {
+            if (db != null) db.close();
+        }
+        return id;
     }
 
+    // Obtener todas las comidas
     public Cursor getAllFoods() {
         SQLiteDatabase db = getReadableDatabase();
         String[] projection = {
@@ -49,10 +59,10 @@ public class DBHelper extends SQLiteOpenHelper {
                 FoodContract.FoodEntry.COLUMN_NAME,
                 FoodContract.FoodEntry.COLUMN_DESC
         };
-        return db.query(FoodContract.FoodEntry.TABLE_NAME,
-                projection, null, null, null, null, null);
+        return db.query(FoodContract.FoodEntry.TABLE_NAME, projection, null, null, null, null, FoodContract.FoodEntry.COLUMN_NAME + " ASC");
     }
 
+    // Obtener comida específica
     public Cursor getFood(long id) {
         SQLiteDatabase db = getReadableDatabase();
         String[] projection = {
@@ -62,10 +72,10 @@ public class DBHelper extends SQLiteOpenHelper {
         };
         String selection = FoodContract.FoodEntry.COLUMN_ID + " = ?";
         String[] selArgs = { String.valueOf(id) };
-        return db.query(FoodContract.FoodEntry.TABLE_NAME, projection,
-                selection, selArgs, null, null, null);
+        return db.query(FoodContract.FoodEntry.TABLE_NAME, projection, selection, selArgs, null, null, null);
     }
 
+    // Actualizar comida
     public int updateFood(long id, String nombre, String descripcion) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -73,14 +83,19 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(FoodContract.FoodEntry.COLUMN_DESC, descripcion);
         String where = FoodContract.FoodEntry.COLUMN_ID + " = ?";
         String[] whereArgs = { String.valueOf(id) };
-        return db.update(FoodContract.FoodEntry.TABLE_NAME, values, where, whereArgs);
+        int rows = db.update(FoodContract.FoodEntry.TABLE_NAME, values, where, whereArgs);
+        db.close();
+        return rows;
     }
 
+    // Eliminar comida
     public int deleteFood(long id) {
         SQLiteDatabase db = getWritableDatabase();
         String where = FoodContract.FoodEntry.COLUMN_ID + " = ?";
         String[] whereArgs = { String.valueOf(id) };
-        return db.delete(FoodContract.FoodEntry.TABLE_NAME, where, whereArgs);
+        int deleted = db.delete(FoodContract.FoodEntry.TABLE_NAME, where, whereArgs);
+        db.close();
+        return deleted;
     }
 }
 
