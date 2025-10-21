@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Layout para la actividad de agregar un nuevo alimento. Contiene campos de texto para el nombre y la descripción, y botones para guardar o volver. -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">

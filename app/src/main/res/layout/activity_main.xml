@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Layout para la actividad principal. Incluye un campo de búsqueda, un botón para agregar alimentos y una lista para mostrar los alimentos existentes. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"

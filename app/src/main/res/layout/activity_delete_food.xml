@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Layout para la actividad de eliminar un alimento. Muestra un mensaje de confirmación y botones para eliminar o cancelar. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:padding="16dp"

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Layout para la actividad de actualizar un alimento. Es similar al de agregar, pero los campos se precargan con los datos del alimento a modificar. -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
