@@ -23,25 +23,7 @@ El objetivo principal de este proyecto es implementar un sistema CRUD completo q
 La aplicación sigue una estructura organizada por actividades y clases auxiliares, separando la lógica del acceso a datos:
 
 
-/app
-├── java/com/app/myapptest
-│ ├── AddFoodActivity.java
-│ ├── UpdateFoodActivity.java
-│ ├── DeleteFoodActivity.java
-│ ├── MainActivity.java
-│ ├── DBHelper.java
-│ ├── Food.java
-│ └── adapters/
-│ └── FoodAdapter.java
-│
-└── res/
-├── layout/
-│ ├── activity_main.xml
-│ ├── activity_add_food.xml
-│ ├── activity_update_food.xml
-│ └── activity_delete_food.xml
-└── values/
-└── strings.xml
+<img width="315" height="599" alt="image" src="https://github.com/user-attachments/assets/02b74fdc-001e-4d2e-87bb-f8ef6601172e" />
 
 
 ---
