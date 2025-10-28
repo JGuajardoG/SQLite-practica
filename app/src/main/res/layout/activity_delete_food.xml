@@ -1,29 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Layout para la actividad de eliminar un alimento. Muestra un mensaje de confirmación y botones para eliminar o cancelar. -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="16dp"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".DeleteFoodActivity">
 
-    <TextView
-        android:id="@+id/tvMensaje"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="¿Seguro que desea eliminar este alimento?"
-        android:textSize="18sp"
-        android:padding="8dp"/>
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/btnConfirmar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Eliminar"/>
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="Eliminar alimento" />
 
-    <Button
-        android:id="@+id/btnCancelar"
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Cancelar"
-        android:layout_marginTop="8dp"/>
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center_horizontal"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="32dp"
+            android:src="@android:drawable/ic_dialog_alert"
+            app:tint="@android:color/holo_red_dark" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="¿Seguro que deseas eliminar este alimento?"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Esta acción no se puede deshacer" />
+
+        <include
+            android:id="@+id/food_item_to_delete"
+            layout="@layout/list_item_food"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/btnConfirmar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Eliminar"
+            android:backgroundTint="@android:color/holo_red_dark"/>
+
+        <Button
+            android:id="@+id/btnCancelar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cancelar"
+            android:layout_marginTop="8dp"
+            style="@style/Widget.MaterialComponents.Button.TextButton"/>
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

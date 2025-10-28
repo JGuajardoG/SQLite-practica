@@ -1,28 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Layout para la actividad de agregar un nuevo alimento. Contiene campos de texto para el nombre y la descripción, y botones para guardar o volver. -->
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".AddFoodActivity">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:padding="16dp"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/etNombre"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nombre" />
+            android:layout_height="?attr/actionBarSize"
+            app:title="Agregar alimento" />
 
-        <EditText
-            android:id="@+id/etDescripcion"
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Nombre"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:hint="Descripción"
-            android:inputType="textMultiLine"
-            android:minLines="3"/>
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etDescripcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minLines="3"
+                android:gravity="top"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
 
         <Button
             android:id="@+id/btnGuardar"
@@ -34,7 +69,10 @@
             android:id="@+id/btnVolver"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="Volver"
-            android:layout_marginTop="8dp"/>
+            style="@style/Widget.MaterialComponents.Button.TextButton"/>
+
     </LinearLayout>
-</ScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
