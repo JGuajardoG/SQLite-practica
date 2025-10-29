@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  Layout para la actividad principal (MainActivity).
+
+  Es la pantalla de inicio de la app. Utiliza un CoordinatorLayout para gestionar
+  elementos complejos como la Toolbar y el FloatingActionButton. La lista de
+  alimentos (ListView) ocupa el área central.
+-->
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -13,7 +20,7 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="29dp"
+            android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary" />
 
     </com.google.android.material.appbar.AppBarLayout>

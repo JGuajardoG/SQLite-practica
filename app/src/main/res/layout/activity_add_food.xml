@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  Layout para la actividad AddFoodActivity.
+
+  Define la interfaz de usuario para agregar un nuevo alimento. Consiste en una
+  barra de herramientas (Toolbar), campos de texto para el nombre y la descripción,
+  y botones para guardar o volver.
+-->
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"

@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  Layout para un único item en la lista de alimentos.
+
+  Este es el diseño de la tarjeta que se muestra para cada alimento. Es reutilizado por
+  el FoodCursorAdapter para construir cada fila de la lista. Define la estructura de la
+  tarjeta, incluyendo el icono, el nombre, la descripción y el botón de eliminar.
+-->
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"

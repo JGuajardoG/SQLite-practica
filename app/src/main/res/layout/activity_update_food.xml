@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  Layout para la actividad UpdateFoodActivity.
+
+  Define la interfaz para actualizar un alimento existente. Es muy similar al
+  layout para agregar, con una Toolbar, campos de texto y botones. Los campos
+  se llenarán programáticamente con los datos del alimento a editar.
+-->
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"

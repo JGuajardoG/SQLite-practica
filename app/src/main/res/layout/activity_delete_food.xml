@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  Layout para la actividad DeleteFoodActivity.
+
+  Muestra una pantalla de confirmación para eliminar un alimento. Contiene un
+  mensaje de advertencia, una vista del item a eliminar (reutilizando el layout
+  list_item_food.xml) y los botones para confirmar o cancelar la acción.
+-->
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
