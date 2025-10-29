@@ -74,9 +74,9 @@ Proyecto desarrollado por estudiantes de Ingeniería en Informática:
 
 Jeremy Guajardo
 
-Jade Contreras
+Jade Conrido
 
-Leonardo Perez
+Leonardo Pérez
 
 Repositorio
 
