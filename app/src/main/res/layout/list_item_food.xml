@@ -42,6 +42,15 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small" />
         </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/btn_delete_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_menu_delete"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:tint="@android:color/holo_red_light" />
+
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

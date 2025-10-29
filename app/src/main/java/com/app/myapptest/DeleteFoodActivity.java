@@ -21,9 +21,6 @@ public class DeleteFoodActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
 
         btnConfirmar = findViewById(R.id.btnConfirmar);
         btnCancelar = findViewById(R.id.btnCancelar);
@@ -60,11 +57,5 @@ public class DeleteFoodActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Error al eliminar", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
     }
 }

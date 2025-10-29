@@ -21,9 +21,6 @@ public class UpdateFoodActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
 
         etNombre = findViewById(R.id.etNombre);
         etDescripcion = findViewById(R.id.etDescripcion);
@@ -65,11 +62,5 @@ public class UpdateFoodActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Error al actualizar", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
     }
 }

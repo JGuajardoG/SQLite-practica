@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -15,7 +14,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class MainActivity extends AppCompatActivity {
     DBHelper dbHelper;
     ListView listView;
-    SimpleCursorAdapter adapter;
+    FoodCursorAdapter adapter;
     Cursor cursor;
 
     @Override
@@ -32,18 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
         btnAddFood.setOnClickListener(v -> startActivity(new Intent(this, AddFoodActivity.class)));
 
-        listView.setOnItemClickListener((parent, view, position, id) -> {
-            Intent i = new Intent(this, UpdateFoodActivity.class);
-            i.putExtra("food_id", id);
-            startActivity(i);
-        });
-
-        listView.setOnItemLongClickListener((parent, view, position, id) -> {
-            Intent i = new Intent(this, DeleteFoodActivity.class);
-            i.putExtra("food_id", id);
-            startActivity(i);
-            return true;
-        });
+        // Toda la lógica de clics (actualizar y eliminar) se maneja ahora
+        // directamente en el FoodCursorAdapter para evitar conflictos.
     }
 
     @Override
@@ -54,9 +43,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadData() {
         cursor = dbHelper.getAllFoods();
-        String[] from = {FoodContract.FoodEntry.COLUMN_NAME, FoodContract.FoodEntry.COLUMN_DESC};
-        int[] to = {R.id.text1, R.id.text2};
-        adapter = new SimpleCursorAdapter(this, R.layout.list_item_food, cursor, from, to, 0);
+        // Usamos nuestro nuevo adaptador personalizado.
+        adapter = new FoodCursorAdapter(this, cursor);
         listView.setAdapter(adapter);
     }
 
